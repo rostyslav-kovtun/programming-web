@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 5</title>
+</head>
+<body>
+
+<h1>Загальний рахунок <span id="score">0%</span></h1>
+
+<button onclick="generateQuestion()">Наступне завдання</button>
+
+<p id="question">3 × 4 =</p>
+<input type="text" id="answer" placeholder="Введіть відповідь">
+
+<button onclick="checkAnswer()">Перевірити</button>
+
+<p id="result"></p>
+
+<script>
+    let correctAnswers = 0;
+    let totalQuestions = 0;
+
+    function generateQuestion() {
+        let multiplier1 = Math.floor(Math.random() * 10);
+        let multiplier2 = Math.floor(Math.random() * 10);
+        document.getElementById('question').textContent = `${multiplier1} × ${multiplier2} =`;
+        document.getElementById('answer').value = '';
+    }
+
+    function checkAnswer() {
+        let userAnswer = parseInt(document.getElementById('answer').value);
+        let question = document.getElementById('question').textContent;
+        let multipliers = question.match(/\d+/g);
+        let correctAnswer = multipliers[0] * multipliers[1];
+
+        if (!isNaN(userAnswer)) {
+            totalQuestions++;
+
+            if (userAnswer === correctAnswer) {
+                correctAnswers++;
+                document.getElementById('result').textContent = 'Правильно!';
+            } else {
+                document.getElementById('result').textContent = `Помилка, правильна відповідь: ${correctAnswer}`;
+            }
+
+            let score = Math.round((correctAnswers / totalQuestions) * 100);
+            document.getElementById('score').textContent = `${score}% (${correctAnswers} правильних відповідей з ${totalQuestions})`;
+
+            generateQuestion();
+        } else {
+            alert('Будь ласка, введіть число.');
+        }
+    }
+
+    generateQuestion();
+</script>
+
+</body>
+</html>

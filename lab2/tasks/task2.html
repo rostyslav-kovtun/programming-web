@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Калькулятор</title>
+</head>
+<body>
+
+<input type="text" id="display" readonly>
+
+<div>
+    <button onclick="appendCharacter('1')">1</button>
+    <button onclick="appendCharacter('2')">2</button>
+    <button onclick="appendCharacter('3')">3</button>
+    <button onclick="appendCharacter('+')">+</button>
+</div>
+
+<div>
+    <button onclick="appendCharacter('4')">4</button>
+    <button onclick="appendCharacter('5')">5</button>
+    <button onclick="appendCharacter('6')">6</button>
+    <button onclick="appendCharacter('-')">-</button>
+</div>
+
+<div>
+    <button onclick="appendCharacter('7')">7</button>
+    <button onclick="appendCharacter('8')">8</button>
+    <button onclick="appendCharacter('9')">9</button>
+    <button onclick="appendCharacter('*')">*</button>
+</div>
+
+<div>
+    <button onclick="appendCharacter('0')">0</button>
+    <button onclick="appendCharacter('.')">.</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="appendCharacter('/')">/</button>
+</div>
+
+<div>
+    <button onclick="clearDisplay()">C</button>
+</div>
+
+<script>
+    function appendCharacter(char) {
+        document.getElementById('display').value += char;
+    }
+    function calculate() {
+        try {
+            document.getElementById('display').value = eval(document.getElementById('display').value);
+        } catch (error) {
+            document.getElementById('display').value = 'Error';
+        }
+    }
+    function clearDisplay() {
+        document.getElementById('display').value = '';
+    }
+</script>
+</body>
+</html>

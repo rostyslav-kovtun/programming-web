@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 4</title>
+    <style>
+        #image-container {
+            text-align: center;
+        }
+
+        #image-container img {
+            max-width: 100%;
+            max-height: 80vh;
+        }
+    </style>
+</head>
+<body>
+
+<div id="image-container">
+    <img id="current-image" src="" alt="Зображення">
+</div>
+
+<div>
+    <button onclick="showPrevious()">Назад</button>
+    <button onclick="showNext()">Вперед</button>
+</div>
+
+<script>
+    let imageNames = ['images/flag.jpg', 'images/coat-of-arms.jpeg', 'images/js.jpg'];
+    let currentImageIndex = 0;
+    let currentImageElement = document.getElementById('current-image');
+
+    function showImage(index) {
+        currentImageIndex = index;
+        currentImageElement.src = imageNames[currentImageIndex];
+    }
+
+    function showNext() {
+        currentImageIndex = (currentImageIndex + 1) % imageNames.length;
+        showImage(currentImageIndex);
+    }
+
+    function showPrevious() {
+        currentImageIndex = (currentImageIndex - 1 + imageNames.length) % imageNames.length;
+        showImage(currentImageIndex);
+    }
+
+    showImage(currentImageIndex);
+</script>
+
+</body>
+</html>

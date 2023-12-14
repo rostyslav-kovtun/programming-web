@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 5</title>
+</head>
+<script>
+  let a, b;
+  let sum = 0, i = 0;
+
+  function calculate() {
+    a = parseFloat(document.getElementById('t_a').value);
+    b = parseFloat(document.getElementById('t_b').value);
+    let accuracy = 0.001;
+    let factorial = 1;
+    let cur;
+
+    do {
+      i++;
+      factorial *= i;
+      for (let j = 1; j <= i; j++) {
+        cur = -1 * Math.pow(i, 1) * (a + b - i) / factorial;
+        sum += cur;
+      }
+    } while (cur > accuracy);
+
+  document.getElementById('t_c').value = sum;
+  }
+</script>
+<body>
+  <form id="main_form">
+    a<input type="text" id="t_a" /><br />
+    b<input type="text" id="t_b" /><br />
+    Результат<input type="text" id="t_c" /><br />
+    <input type="button" value="Розрахувати" onClick="calculate()" />
+  </form>
+</body>
+</html>

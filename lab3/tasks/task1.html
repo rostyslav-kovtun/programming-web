@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <script>
+        function calculateRectangle() {
+
+            let length = parseFloat(document.getElementById('length').value);
+            let width = parseFloat(document.getElementById('width').value);
+
+            let perimeter = 2 * (length + width);
+            let area = length * width;
+            let diagonal = Math.sqrt(Math.pow(length, 2) + Math.pow(width, 2));
+
+            document.getElementById('perimeter').textContent = "Периметр: " + perimeter;
+            document.getElementById('area').textContent = "Площа: " + area;
+            document.getElementById('diagonal').textContent = "Довжина діагоналі: " + diagonal.toFixed(4);
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <label for="length">Довжина</label>
+    <input type="text" id="length" oninput="calculateRectangle()">
+</div>
+
+<div>
+    <label for="width">Ширина</label>
+    <input type="text" id="width" oninput="calculateRectangle()">
+</div>
+
+<div>
+    <p id="perimeter">Периметр: 0</p>
+    <p id="area">Площа: 0</p>
+    <p id="diagonal">Довжина діагоналі: 0.0000</p>
+</div>
+
+</body>
+</html>

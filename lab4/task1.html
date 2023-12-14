@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<form id="quizForm" onsubmit="calculateResults(); return false;">
+    <h2>Квіз</h2>
+
+    <!-- Запитання 1 (прапорці) -->
+    <fieldset>
+        <legend>Ці країни офіційно заявили про намір вступити до НАТО у травні 2022 року:</legend>
+        <p>Оберіть правильні відповіді:</p>
+        <label><input type="checkbox" name="q1" value="1">Швеція</label>
+        <label><input type="checkbox" name="q1" value="0">Україна</label>
+        <label><input type="checkbox" name="q1" value="0">Японія</label>
+        <label><input type="checkbox" name="q1" value="1">Фінляндія</label>
+    </fieldset>
+
+    <!-- Запитання 2 (прапорці) -->
+    <fieldset>
+        <legend>2+2 це те саме, що й:</legend>
+        <p>Оберіть правильні відповіді:</p>
+        <label><input type="checkbox" name="q2" value="1">6-2</label>
+        <label><input type="checkbox" name="q2" value="1">2*2</label>
+        <label><input type="checkbox" name="q2" value="0">10-2</label>
+        <label><input type="checkbox" name="q2" value="0">100/10</label>
+    </fieldset>
+
+    <!-- Запитання 3 (радіокнопки) -->
+    <fieldset>
+        <legend>3. Столиця Японії:</legend>
+        <p>Оберіть правильний варіант:</p>
+        <label><input type="radio" name="q3" value="1">Токіо</label>
+        <label><input type="radio" name="q3" value="0">Пекін</label>
+    </fieldset>
+
+    <!-- Запитання 4 (радіокнопки) -->
+    <fieldset>
+        <legend>4. Президент України:</legend>
+        <p>Оберіть правильний варіант:</p>
+        <label><input type="radio" name="q4" value="1">Володимир Зеленський</label>
+        <label><input type="radio" name="q4" value="0">Дональд Трамп</label>
+    </fieldset>
+
+    <!-- Запитання 5 (список множинного вибору) -->
+    <fieldset>
+        <legend>5. Президентами України до теперішнього часу були такі люди:</legend>
+        <p>Оберіть правильні відповіді:</p>
+        <select name="q5" multiple>
+            <option value="0">Дональд Трамп</option>
+            <option value="1">Віктор Ющенко</option>
+            <option value="1">Володимир Зеленський</option>
+            <option value="0">Кім Чен Ин</option>
+        </select>
+    </fieldset>
+
+    <!-- Запитання 6 (список множинного вибору) -->
+    <fieldset>
+        <legend>До мов програмування відносяться:</legend>
+        <p>Оберіть правильні відповіді:</p>
+        <select name="q6" multiple>
+            <option value="0">Англійська мова</option>
+            <option value="0">Китайська мова</option>
+            <option value="1">JavaScript</option>
+            <option value="1">C++</option>
+        </select>
+    </fieldset>
+
+    <!-- Запитання 7 (текстове поле) -->
+    <fieldset>
+        <legend>Столиця України:</legend>
+        <p>Введіть правильну відповідь:</p>
+        <input type="text" name="q7" placeholder="Текстова відповідь">
+    </fieldset>
+
+    <button type="submit">Завершити тест</button>
+</form>
+
+<h2>Результати</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Запитання</th>
+            <th>Варіанти відповідей</th>
+            <th>Отриманий бал</th>
+        </tr>
+    </thead>
+    <tbody id="resultsTableBody"></tbody>
+</table>
+
+<h3>Загальний бал: <span id="totalScore">0</span></h3>
+
+<script>
+    function calculateResults() {
+        let resultsTableBody = document.getElementById('resultsTableBody');
+        let totalScore = 0;
+
+        for (let i = 1; i <= 7; i++) {
+            let score = 0;
+            let questionName = 'q' + i;
+            let questionInputs = document.getElementsByName(questionName);
+            // Радіокнопки
+            if (questionInputs[0].type === 'radio') {
+                let selectedOption = Array.from(questionInputs).find(input => input.checked);
+                score += selectedOption ? parseFloat(selectedOption.value) : 0;
+                totalScore += score;
+            // Списки множинного вибору
+            } else if (questionInputs[0].type === 'select-multiple') {
+                let selectElement = questionInputs[0];
+                let selectedOptions = Array.from(selectElement.options).filter(option => option.selected).map(option => parseFloat(option.value));
+                let correctOptions = selectedOptions.filter(val => val === 1);
+                if (correctOptions.length === 2 && selectedOptions.length === 2) {
+                    score = 2;
+                    totalScore += score;
+                } else if (correctOptions.length === 1 && selectedOptions.length === 2) {
+                    score = 1;
+                    totalScore += score;
+                } else {
+                    score = 0;
+                }
+            // Прапорці
+            } else if (questionInputs[0].type === 'checkbox') {
+                let selectedOptions = Array.from(questionInputs).filter(input => input.checked);
+                let correctOptions = selectedOptions.filter(input => input.value === '1');
+                let incorrectOptions = selectedOptions.filter(input => input.value === '0');
+                if (correctOptions.length === 2 && selectedOptions.length === 2) {
+                    score = 2;
+                    totalScore += score;
+                } else if (correctOptions.length === 1 && selectedOptions.length === 2) {
+                    score = 1;
+                    totalScore += score;
+                } else {
+                    score = 0;
+                }
+            // Текстове
+            } else {
+                let userInput = questionInputs[0].value.trim().toLowerCase();
+                if (userInput === 'київ') {
+                    score += 1;
+                    totalScore += score;
+                }
+            }
+
+            // Додавання рядка до таблиці результатів
+            let row = resultsTableBody.insertRow();
+            let cell1 = row.insertCell(0);
+            cell1.textContent = 'Запитання ' + i;
+            let cell2 = row.insertCell(1);
+
+            // Process options for multiple-choice select
+            if (questionInputs[0].type === 'select-multiple') {
+                let selectElement = questionInputs[0];
+                let selectedOptionsText = Array.from(selectElement.options)
+                    .filter(option => option.selected)
+                    .map(option => option.textContent.trim())
+                    .join(', ');
+                cell2.textContent = selectedOptionsText;
+            } else {
+                // Process other input types
+                cell2.textContent = Array.from(questionInputs)
+                    .filter(input => (input.type === 'text' && input.value.trim() !== '') || input.checked)
+                    .map(input => input.type === 'text' ? input.value.trim() : input.parentElement.textContent.trim())
+                    .join(', ');
+            }
+
+            let cell3 = row.insertCell(2);
+            cell3.textContent = score;
+
+        }
+
+        // Виведення загального балу
+        document.getElementById('totalScore').textContent = totalScore;
+    }
+</script>
+
+</body>
+</html>

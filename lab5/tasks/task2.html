@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 2</title>
+  <style>
+    ul {
+      padding: 0;
+    }
+    ul.nav {
+      margin: 0;
+      padding: 0;
+      width: 150px;
+    }
+    ul.nav li {
+      background: #B3B3FF;
+      border-top: 1px solid #FFFFFF;
+      border-bottom: 1px solid #FFFFFF;
+      list-style: none;
+      position: relative;
+    }
+    ul.nav li a {
+        text-decoration: none;
+        display: block;
+        padding: 0.5em 0.5em 0.5em 1.5em;
+    }
+    ul.nav label {
+      background: #B3B3FF;
+      padding: 0.5em 0.5em 0.5em 1.5em;
+      display: block;
+    }
+
+    ul.nav li ul, ul.nav input {
+      display: none;
+    }
+
+    ul.nav li input:checked + label + ul {
+      display: block;
+    }
+    ul.nav li input:checked + label + ul li {
+      background: yellow;
+    }
+    ul.nav li input:checked + label {
+      background: #d3da56;
+    }
+    ul.nav label:before {
+      content: "";
+      border-width: 0.5em;
+      border-style: solid;
+      border-color: transparent transparent transparent black;
+      position: absolute;
+      top: 0.5em;
+      left: 0.25em;
+    }
+    ul.nav li input:checked + label:before{
+      transform: rotate(90deg);
+    }
+
+  </style>
+</head>
+<body>
+  <ul class="nav">
+    <li>
+      <input type="checkbox" id="p1">
+      <label for="p1">пункт 1</label>
+      <ul>
+        <li>
+          <a href="#">пункт 1.1</a>
+        </li>
+        <li>
+          <a href="#">пункт 1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <input type="checkbox" id="p2">
+      <label for="p2">пункт 2</label>
+      <ul>
+        <li>
+          <a href="#">пункт 2.1</a>
+        </li>
+        <li>
+          <input type="checkbox" id="p22">
+          <label for="p22">пункт 2.2</label>
+          <ul>
+            <li><a href="#">пункт 2.2.1</a></li>
+            <li><a href="#">пункт 2.2.2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 3</title>
+</head>
+<body>
+
+<div id="keyboard">
+    <script>
+        let ukrainianAlphabet = ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'и', 'і', 'ї', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ю', 'я'];
+        let englishAlphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+        let currentLayout = ukrainianAlphabet;
+
+        for (let i = 0; i < currentLayout.length; i++) {
+            let button = document.createElement("button");
+            button.textContent = currentLayout[i];
+            button.addEventListener("click", function () {
+                addToTextField(currentLayout[i]);
+            });
+            document.getElementById("keyboard").appendChild(button);
+
+            if ((i + 1) % 10 === 0) {
+                document.getElementById("keyboard").appendChild(document.createElement("br"));
+            }
+        }
+
+        let switchLayoutButton = document.createElement("button");
+        switchLayoutButton.textContent = "Alt+Shift";
+        switchLayoutButton.addEventListener("click", function () {
+            toggleLayout();
+        });
+        document.getElementById("keyboard").appendChild(switchLayoutButton);
+
+        let clearButton = document.createElement("button");
+        clearButton.textContent = "Очистити поле";
+        clearButton.addEventListener("click", function () {
+            clearTextField();
+        });
+        document.getElementById("keyboard").appendChild(clearButton);
+
+        function addToTextField(letter) {
+            document.getElementById("text-field").value += letter;
+        }
+
+        function clearTextField() {
+            document.getElementById("text-field").value = "";
+        }
+
+        function toggleLayout() {
+            currentLayout = (currentLayout === ukrainianAlphabet) ? englishAlphabet : ukrainianAlphabet;
+            updateButtons();
+            updateEventListeners();
+        }
+
+        function updateButtons() {
+            let buttons = document.getElementById("keyboard").getElementsByTagName("button");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].textContent = currentLayout[i];
+            }
+        }
+
+        function updateEventListeners() {
+            let buttons = document.getElementById("keyboard").getElementsByTagName("button");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].removeEventListener("click", function () {
+                    addToTextField(currentLayout[i]);
+                });
+                buttons[i].addEventListener("click", function () {
+                    addToTextField(currentLayout[i]);
+                });
+            }
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.altKey && event.shiftKey) {
+                toggleLayout();
+            }
+        });
+    </script>
+</div>
+
+<div>
+    <textarea id="text-field" rows="4" cols="50"></textarea>
+</div>
+
+</body>
+</html>

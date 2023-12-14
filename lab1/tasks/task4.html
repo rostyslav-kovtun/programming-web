@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 4</title>
+</head>
+<script>
+  let a, b, c, d;
+  function calculate(x, y) {
+    a = parseInt(document.getElementById('t_a').value);
+    b = parseInt(document.getElementById('t_b').value);
+    if (a * b > 0) {
+      d = a + b;
+    } else if (Math.pow(a, 2) > 100) {
+      d = a;
+    } else {
+      d = Math.pow(a, 3) + b;
+    }
+    document.getElementById('t_d').value = "" + d;
+  }
+</script>
+<body>
+  <form id="main_form">
+    a<input type="text" id="t_a"><br />
+    b<input type="text" id="t_b"><br />
+    d<input type="text" id="t_d"><br />
+    <input type="button" value="Розрахувати" onClick="calculate()">
+  </form>
+</body>
+</html>

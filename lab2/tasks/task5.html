@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 5</title>
+</head>
+<body>
+  <script>
+    console.info("Це інформаційне повідомлення."); // виведення інфи
+
+    console.warn("Це попередження."); // виведення попередження
+
+    console.error("Це повідомлення про помилку."); // виведення помилок
+
+    let exampleObject = { name: "Ростислав", age: 21, city: "Івано-Франківськ" };
+    console.dir(exampleObject); // виведення списку властивостей якогось об'єкта
+
+    let exampleHTML = "<div><p>Привіт</p></div>";
+    console.dirxml(exampleHTML); // виведення списку властивостей елементу HTML (або XML)
+
+    console.time("timer");
+    // тут якийсь код
+    console.timeEnd("timer"); // вимірювання часу виконання коду
+
+    console.profile("myProfile");
+    // тут якийсь код
+    console.profileEnd("myProfile"); // вимірювання часу функцій в режимі профілювання
+
+    let x = 5;
+    console.assert(x === 10, "Значення x не дорівнює 10"); // виведення повідомлення про помилку, якщо вказала умова не виконується
+
+  </script>
+</body>
+</html>

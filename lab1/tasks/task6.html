@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 6</title>
+</head>
+<script>
+const continents = ["Африка", "Америка", "Азія", "Європа"];
+const densities = [41, 22, 147, 73];
+const areas = [30370000, 42300000, 44580000, 10180000];
+
+let selectedContinentIndex = 0;
+
+function fun1() {
+  const selectedContinent = document.getElementById("continent").value;
+  selectedContinentIndex = continents.indexOf(selectedContinent);
+
+  if (selectedContinentIndex !== -1) {
+    document.getElementById("density").textContent = densities[selectedContinentIndex];
+    document.getElementById("area").textContent = areas[selectedContinentIndex];
+  } else {
+    alert("Континент не знайдено.");
+  }
+}
+
+function fun2() {
+  const population = densities[selectedContinentIndex] * areas[selectedContinentIndex];
+
+  document.getElementById("population").textContent = population;
+}
+</script>
+<body>
+  <h1>Інформація про континенти</h1>
+  <label for="continent">Введіть назву континенту:</label>
+  <input type="text" id="continent">
+  <button onclick="fun1()">Густина і площа</button>
+  <button onclick="fun2()">Населення</button>
+  <p>Густина населення: <span id="density"></span> осіб/км²</p>
+  <p>Площа: <span id="area"></span> км²</p>
+  <p>Населення: <span id="population"></span></p>
+</body>
+</html>

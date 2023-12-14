@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2</title>
+</head>
+<body>
+
+<div id="keyboard">
+    <script>
+        let alphabet = ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'и', 'і', 'ї', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ю', 'я'];
+
+        for (let i = 0; i < alphabet.length; i++) {
+            let button = document.createElement("button");
+            button.textContent = alphabet[i];
+            button.addEventListener("click", function () {
+                addToTextField(alphabet[i]);
+            });
+            document.getElementById("keyboard").appendChild(button);
+
+            if ((i + 1) % 10 === 0) {
+                document.getElementById("keyboard").appendChild(document.createElement("br"));
+            }
+        }
+
+        let clearButton = document.createElement("button");
+        clearButton.textContent = "Очистити поле";
+        clearButton.addEventListener("click", function () {
+            clearTextField();
+        });
+        document.getElementById("keyboard").appendChild(clearButton);
+
+        function addToTextField(letter) {
+            document.getElementById("text-field").value += letter;
+        }
+
+        function clearTextField() {
+            document.getElementById("text-field").value = "";
+        }
+    </script>
+</div>
+
+<div>
+    <textarea id="text-field" rows="4" cols="50"></textarea>
+</div>
+
+</body>
+</html>
