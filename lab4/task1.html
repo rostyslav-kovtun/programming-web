@@ -113,7 +113,7 @@
             let score = 0;
             let questionName = 'q' + i;
             let questionInputs = document.getElementsByName(questionName);
-            // Радіокнопки
+            // Радіо
             if (questionInputs[0].type === 'radio') {
                 let selectedOption = Array.from(questionInputs).find(input => input.checked);
                 score += selectedOption ? parseFloat(selectedOption.value) : 0;
@@ -155,13 +155,12 @@
                 }
             }
 
-            // Додавання рядка до таблиці результатів
+            // Виведення результатів
             let row = resultsTableBody.insertRow();
             let cell1 = row.insertCell(0);
             cell1.textContent = 'Запитання ' + i;
             let cell2 = row.insertCell(1);
 
-            // Process options for multiple-choice select
             if (questionInputs[0].type === 'select-multiple') {
                 let selectElement = questionInputs[0];
                 let selectedOptionsText = Array.from(selectElement.options)
@@ -170,7 +169,6 @@
                     .join(', ');
                 cell2.textContent = selectedOptionsText;
             } else {
-                // Process other input types
                 cell2.textContent = Array.from(questionInputs)
                     .filter(input => (input.type === 'text' && input.value.trim() !== '') || input.checked)
                     .map(input => input.type === 'text' ? input.value.trim() : input.parentElement.textContent.trim())
@@ -182,7 +180,6 @@
 
         }
 
-        // Виведення загального балу
         document.getElementById('totalScore').textContent = totalScore;
     }
 </script>
