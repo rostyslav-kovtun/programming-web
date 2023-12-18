@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 5</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="container">
+  <div id="parent">
+    Parent element.
+    <div id="child">Child element.</div>
+  </div>
+</div>
+
+<button id="checkContainment">contains()</button>
+<button id="getCurrentTime">now()</button>
+
+<script>
+  $(document).ready(function() {
+    // $.contains()
+    $('#checkContainment').click(function() {
+      const isContained = $.contains($('#parent')[0], $('#child')[0]);
+      if (isContained) {
+        alert('Child існує.');
+      } else {
+        alert('Child не існує.');
+      }
+    });
+
+    // $.now()
+    $('#getCurrentTime').click(function() {
+      const currentTime = $.now();
+      alert(currentTime);
+    });
+  });
+</script>
+
+</body>
+</html>

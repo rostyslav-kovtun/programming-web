@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 3</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<button id="addButton">.add()</button>
+<button id="hasButton">.has()</button>
+<button id="parentsButton">.parents()</button>
+<button id="closestButton">.closest()</button>
+<button id="mapButton">.map()</button>
+
+<div id="container">
+  <div class="parent">
+    <div class="child">Child 1</div>
+    <div class="child">Child 2</div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    // .add()
+    $('#addButton').click(function() {
+      $('.child').add('.parent').css('border', '2px solid red');
+    });
+
+    // .has()
+    $('#hasButton').click(function() {
+      $('.parent').has('.child').css('background-color', 'yellow');
+    });
+
+    // .parents()
+    $('#parentsButton').click(function() {
+      $('.child').parents('.parent').css('font-weight', 'bold');
+    });
+
+    // .closest()
+    $('#closestButton').click(function() {
+      $('.child').closest('.parent').css('color', 'green');
+    });
+
+    // .map()
+    $('#mapButton').click(function() {
+      const childTextArray = $('.child').map(function() {
+        return $(this).text();
+      }).get();
+
+      alert(childTextArray.join(', '));
+    });
+  });
+</script>
+
+</body>
+</html>

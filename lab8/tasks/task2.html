@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 2</title>
+</head>
+<body>
+
+<!-- Завдання 2.1 -->
+<form>
+  <span>
+  <p style="display: inline-block">Завдання 2.1. Виведення поточної дати, дня тижня і часу:</p>
+  <button type="button" onclick="displayCurrentDate()">виконати</button></span>
+  <div class="displayCurrentDate"></div>
+</form>
+
+<!-- Завдання 2.2 -->
+<form>
+  <p style="display: inline-block">Завдання 2.2. Виведення дня і номера тижня:</p>
+  <button type="button" onclick="displayDayInfo()">виконати</button>
+  <div class="displayDayInfo"></div>
+</form>
+
+<!-- Завдання 2.3 -->
+<form>
+  <p style="margin-bottom: 4px">Завдання 2.3. Знайти дату, яка була N днів назад чи вперед:</p>
+  <label for="daysInput">Введіть кількість днів:</label>
+  <input type="text" id="daysInput" placeholder="Введіть число днів">
+  <button type="button" onclick="calculateDate()">Знайти дату</button>
+  <div id="result2_3" style="margin-top: 4px"></div>
+</form>
+
+<!-- Завдання 2.4 -->
+<form>
+  <p style="margin-bottom: 4px">Завдання 2.4. Останній день місяця:</p>
+  <label for="monthInput">Місяць:</label>
+  <input type="number" id="monthInput" min="1" max="12">
+  <label for="yearInput">Рік:</label>
+  <input type="number" id="yearInput">
+  <button type="button" onclick="getLastDayOfMonth()">Виконати</button>
+  <div id="result2_4" style="margin-top: 4px"></div>
+</form>
+
+<!-- Завдання 2.5 -->
+<form>
+  <p style="display: inline-block">Завдання 2.5. Кількість секунд:</p>
+  <button type="button" onclick="calculateSeconds()">виконати</button>
+  <div id="result2_5"></div>
+</form>
+
+<!-- Завдання 2.6 -->
+<form>
+  <p style="margin-bottom: 4px">Завдання 2.6. Форматування дати:</p>
+  <label for="userDateInput">Введіть дату та час у форматі "дд.мм.рррр год:хв":</label>
+  <input type="text" id="userDateInput">
+  <button type="button" onclick="formatUserDate()">Виконати</button>
+  <div id="result2_6" style="margin-top: 4px"></div>
+</form>
+
+<script>
+// Завдання 2.1
+function displayCurrentDate() {
+  const currentDate = new Date();
+  const formattedDate = formatDate(currentDate);
+  const dayOfWeek = getDayOfWeek(currentDate.getDay());
+
+  const displayCurrentDateElement = document.querySelector('.displayCurrentDate');
+
+  displayCurrentDateElement.innerHTML = '';
+  displayCurrentDateElement.innerText = `Дата: ${formattedDate}\nДень тижня: ${dayOfWeek}\nЧас: ${formatTime(currentDate.getHours())}:${formatTime(currentDate.getMinutes())}`;
+}
+
+// Завдання 2.2
+function displayDayInfo() {
+  const currentDate = new Date();
+  const dayNumber = currentDate.getDay() === 0 ? 7 : currentDate.getDay(); // Consider Sunday as the 7th day
+  const dayOfWeek = getDayOfWeek(currentDate.getDay());
+
+  const displayDayInfoElement = document.querySelector('.displayDayInfo');
+
+  displayDayInfoElement.innerHTML = '';
+  displayDayInfoElement.innerText = `Номер тижня: ${dayNumber}\nНазва дня тижня: ${dayOfWeek}`;
+}
+
+// Завдання 2.3
+function calculateDate() {
+  const daysInput = document.getElementById('daysInput').value;
+  const days = parseInt(daysInput);
+
+  if (!isNaN(days)) {
+    const currentDate = new Date();
+    const targetDate = new Date(currentDate);
+
+    targetDate.setDate(currentDate.getDate() + days);
+
+    const resultDisplay = document.getElementById('result2_3');
+    resultDisplay.innerText = targetDate > currentDate ? `Майбутня дата: ${formatDate(targetDate)}` : `Минула дата: ${formatDate(targetDate)}`;
+
+  } else {
+    alert('Введіть коректну кількість днів.');
+  }
+}
+
+// Завдання 2.4
+function getLastDayOfMonth() {
+  const monthInput = document.getElementById('monthInput').value;
+  const yearInput = document.getElementById('yearInput').value;
+
+  const month = parseInt(monthInput);
+  const year = parseInt(yearInput);
+
+  if (!isNaN(month) && !isNaN(year) && month >= 1 && month <= 12) {
+    const lastDay = new Date(year, month, 0).getDate();
+    const resultDisplay = document.getElementById('result2_4');
+    resultDisplay.innerText = `Останній день місяця: ${lastDay}`;
+
+  } else {
+    alert('Введіть коректні дані.');
+  }
+}
+
+// Завдання 2.5
+function calculateSeconds() {
+  const currentDate = new Date();
+  const startOfDay = new Date(currentDate);
+  startOfDay.setHours(0, 0, 0, 0);
+
+
+  const secondsPassed = Math.floor((currentDate - startOfDay) / 1000);
+  const secondsLeft = Math.floor(((startOfDay.setDate(startOfDay.getDate() + 1)) - currentDate) / 1000);
+
+  const resultDisplay = document.getElementById('result2_5');
+  resultDisplay.innerText = `Секунд пройшло сьогодні: ${secondsPassed}\nСекунд до кінця дня: ${secondsLeft}`;
+}
+
+// Завдання 2.6
+function formatUserDate() {
+  const userDateInput = document.getElementById('userDateInput').value;
+  const userDate = parseUserDate(userDateInput);
+
+  if (userDate) {
+    const currentDate = new Date();
+    const timeDifference = Math.floor((currentDate - userDate) / 1000);
+
+    let resultText = '';
+    if (timeDifference < 60) {
+      resultText = `${timeDifference} сек. назад`;
+    } else if (timeDifference < 3600) {
+      resultText = `${Math.floor(timeDifference / 60)} хв. назад`;
+    } else {
+      resultText = `${formatDate(userDate)} ${formatTime(userDate.getHours())}:${formatTime(userDate.getMinutes())}`;
+    }
+
+    const resultDisplay = document.getElementById('result2_6');
+    resultDisplay.innerText = resultText;
+
+  } else {
+    alert('Некоректний формат дати та часу. Введіть у форматі "дд.мм.рррр год:хв"');
+  }
+}
+
+function formatDate(date) {
+  const options = { day: 'numeric', month: 'long', year: 'numeric' };
+  return date.toLocaleDateString('uk-UA', options).replace(',', '') + ' року';
+}
+
+function formatTime(timePart) {
+  return timePart < 10 ? `0${timePart}` : `${timePart}`;
+}
+
+function getDayOfWeek(dayNumber) {
+  const daysOfWeek = ['неділя', 'понеділок', 'вівторок', 'середа', 'четвер', 'пʼятниця', 'субота'];
+  return daysOfWeek[dayNumber];
+}
+
+function parseUserDate(userDateInput) {
+  const dateParts = userDateInput.match(/(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2})/);
+  console.log(dateParts);
+  if (dateParts) {
+    const [, day, month, year, hours, minutes] = dateParts;
+    return new Date(year, month - 1, day, hours, minutes);
+  }
+
+  return null;
+}
+
+</script>
+
+</body>
+</html>

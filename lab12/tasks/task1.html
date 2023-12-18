@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 1</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    #animatedBox {
+      width: 100px;
+      height: 100px;
+      background-color: #e4e729;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<button id="startAnimation">Розпочати анімацію</button>
+<div id="animatedBox"></div>
+
+<script>
+  $(document).ready(function() {
+    $('#startAnimation').click(function() {
+      // Властивості, які будуть змінюватися під час анімації
+      let properties = {
+        width: '200px',
+        height: '200px',
+        opacity: 0.5,
+      };
+
+      // Тривалість анімації у мілісекундах
+      let duration = 2000;
+
+      // Тип анімації (easing)
+      let easing = 'swing';
+
+      // Функція, яка викликається по завершенню анімації
+      let completeFunction = function() {
+        alert('Анімація завершилась');
+      };
+
+      // Додаткові опції анімації
+      let options = {
+        queue: false, // Запускати анімацію негайно, не чекаючи завершення попередньої
+        specialEasing: {
+          width: 'linear', // Лінійна анімація ширини
+          height: 'swing'   // Анімація висоти з використанням "swing" easing
+        }
+      };
+
+      // Запуск анімації
+      $('#animatedBox').animate(properties, duration, easing, completeFunction, options);
+    });
+  });
+</script>
+
+</body>
+</html>

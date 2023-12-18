@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html> 
+<head>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    #hide_text.hovered {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>  
+<body>  
+  <h1>Контент сторінки</h1> 
+  <p></p>
+  <a href="#" class="button">Натисніть, щоб показати текст</a> 
+  <div id="hide_text">Демонстраційний прихований текст</div>
+  <p></p>
+  <script>
+    $(document).ready(function() { 
+      const $text = $('#hide_text');
+      
+      // Встановлення тексту для перших і останніх параграфів
+      $('p:first').text("DOM first!");
+      $('p:last').text("DOM last!");
+
+      $text.hide();
+
+      $('.button').click(function() { 
+        $text.show(200);
+      }); 
+
+      // hover, addClass, removeClass
+      $text.hover(function() {
+        $(this).addClass('hovered');
+      }, function() {
+        $(this).removeClass('hovered');
+      });
+    }); 
+  </script>
+</body>  
+</html>

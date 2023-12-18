@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 7</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    #animatedBox {
+      width: 100px;
+      height: 100px;
+      background-color: #3498db;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<button id="startAnimation">Запустити анімацію</button>
+<button id="stopAnimation">Зупинити анімацію</button>
+<button id="disableAnimation">Виключити всі анімації</button>
+
+<div id="animatedBox"></div>
+
+<script>
+  $(document).ready(function() {
+    $('#startAnimation').click(function() {
+      $('#animatedBox').animate({
+        width: '200px',
+        height: '200px',
+        backgroundColor: '#e74c3c'
+      }, 2000);
+    });
+
+    $('#stopAnimation').click(function() {
+      $('#animatedBox').finish();
+    });
+
+    $('#disableAnimation').click(function() {
+
+      // Перевірка поточного стану $.fx.off
+      $.fx.off = !$.fx.off;
+
+      if ($.fx.off) {
+        alert('Анімації виключені.');
+      } else {
+        alert('Анімації включені.');
+      }
+    });
+
+    $('#animatedBox').delay(1000).queue(function(next) {
+      $(this).animate({ opacity: 0 }, 1000);
+      next();
+    }).delay(1000).queue(function(next) {
+      $(this).animate({ opacity: 1 }, 1000);
+      next();
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 3</title>
+</head>
+<body>
+
+<form id="taskForm">
+
+    <!-- Завдання 3.1 -->
+    <label for="camelCaseInput">Введіть змінні в стилі Snake Case:</label>
+    <input type="text" id="camelCaseInput" required>
+    <button type="button" onclick="toCamelCase()">Перетворити на Camel Case</button>
+    <div id="camelCaseResult"></div>
+    <br>
+
+    <!-- Завдання 3.2 -->
+    <label for="snakeCaseInput">Введіть змінні в стилі Camel Case:</label>
+    <input type="text" id="snakeCaseInput" required>
+    <button type="button" onclick="toSnakeCase()">Перетворити на Snake Case</button>
+    <div id="snakeCaseResult"></div>
+    <br>
+
+    <!-- Завдання 3.3 -->
+    <label for="replaceDatesInput">Дата в форматі yyyy/mm/dd:</label>
+    <textarea id="replaceDatesInput" rows="4" cols="50"></textarea>
+    <button type="button" onclick="replaceDates()">Змінити на формат dd.mm.yyyy</button>
+    <div id="replaceDatesResult"></div>
+    <br>
+
+</form>
+
+<script>
+// Завдання 3.1
+function toCamelCase() {
+    const inputValues = document.getElementById('camelCaseInput').value.split(',');
+
+    const camelCaseValues = inputValues.map(variable => {
+        return variable.replace(/_([a-z])/g, (match) => match.toUpperCase());
+    });
+
+    document.getElementById('camelCaseResult').innerText = 'Результат: ' + camelCaseValues.join(', ');
+}
+
+// Завдання 3.2
+function toSnakeCase() {
+    const inputValues = document.getElementById('snakeCaseInput').value.split(',');
+
+    const snakeCaseValues = inputValues.map(variable => {
+        return variable.replace(/[A-Z]/g, match => '_' + match.toLowerCase());
+    });
+
+    document.getElementById('snakeCaseResult').innerText = 'Результат: ' + snakeCaseValues.join(', ');
+}
+
+// Завдання 3.3
+function replaceDates() {
+    const inputText = document.getElementById('replaceDatesInput').value;
+
+    const replacedText = inputText.replace(/(\d{4})\/(\d{2})\/(\d{2})/g, '$3.$2.$1');
+
+    document.getElementById('replaceDatesResult').innerText = 'Результат: ' + replacedText;
+}
+</script>
+
+</body>
+</html>

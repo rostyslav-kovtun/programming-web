@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 2</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<style>
+  #container {
+    width: 500px;
+  }
+</style>
+<body>
+
+<div id="container">
+  <div class="box">Box 1</div>
+</div>
+
+<script>
+  // .append()
+  $('#container').append('<div class="box">Box 2</div>');
+
+  // .clone()
+  const originalBox = $('.box:first');
+  const clonedBox = originalBox.clone();
+  clonedBox.text('Cloned Box');
+  $('#container').append(clonedBox);
+
+  // .width() with function
+  $('.box').width(function(index, oldWidth) {
+    return oldWidth + 50; // Increase the width of each box by 50 pixels
+  });
+
+  // .outerWidth()
+  $('.box').each(function() {
+    const outerWidth = $(this).outerWidth();
+    console.log('Outer width:', outerWidth);
+  });
+</script>
+
+</body>
+</html>

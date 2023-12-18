@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1</title>
+</head>
+<body>
+
+<form id="taskForm">
+
+    <!-- Завдання 1.1 -->
+    <label for="sequenceInput">Послідовність чисел:</label>
+    <input type="text" id="sequenceInput" required>
+    <button type="button" onclick="reverseSequence()">В оберненому порядку</button>
+    <div id="reverseResult"></div>
+    <br>
+
+    <!-- Завдання 1.2 -->
+    <label for="noZerosInput">Масив чисел</label>
+    <input type="text" id="noZerosInput" required>
+    <button type="button" onclick="removeZeros()">Видалити нульові значення</button>
+    <div id="noZerosResult"></div>
+    <br>
+
+    <!-- Завдання 1.3 -->
+    <label for="reverserInput">Текстовий рядок для відображення у протилежному порядку:</label>
+    <input type="text" id="reverserInput" required>
+    <button type="button" onclick="reverseText()">У оберненому порядку</button>
+    <div id="reverserResult"></div>
+    <br>
+
+    <!-- Завдання 1.4 -->
+    <label for="replaceInput">Текстове поле «Я не люблю морозиво»:</label>
+    <input type="text" id="replaceInput" value="Я не люблю морозиво"></input>
+    <button type="button" onclick="performReplace()">Поміняти місцями 2 і 3 слова та поставити коми замість пробілів</button>
+    <div id="replaceResult"></div>
+    <br>
+</form>
+
+<script>
+// Завдання 1.1
+function reverseSequence() {
+    const sequenceInput = document.getElementById('sequenceInput').value;
+    const sequenceArray = sequenceInput.split('').map(Number);
+    const reversedArray = sequenceArray.reverse();
+    document.getElementById('reverseResult').innerText = 'Обернений порядок: ' + reversedArray.join('');
+}
+
+// Завдання 1.2
+function removeZeros() {
+    const noZerosInput = document.getElementById('noZerosInput').value;
+    const numbersArray = noZerosInput.split(',').map(Number);
+    const filteredArray = numbersArray.filter(num => !num.toString().includes('0'));
+    
+    document.getElementById('noZerosResult').innerText = 'Не містить нульових значень: ' + filteredArray.join(', ');
+}
+
+// Завдання 1.3
+function reverseText() {
+    const textInput = document.getElementById('reverserInput').value;
+    const reversedText = textInput.split('').reverse().join('');
+    document.getElementById('reverserResult').innerText = 'У протилежному порядку: ' + reversedText;
+}
+
+// Завдання 1.4
+function performReplace() {
+    const replaceInput = document.getElementById('replaceInput').value;
+    const words = replaceInput.split(' ');
+
+    if (words.length >= 3) {
+        const temp = words[1];
+        words[1] = words[2];
+        words[2] = temp;
+
+        const replacedText = words.join(' ');
+
+        document.getElementById('replaceResult').innerText = 'Результат: ' + replacedText.replace(/\s/g, ',');
+    } else {
+        document.getElementById('replaceResult').innerText = 'Мінімум 3 слова';
+    }
+}
+
+</script>
+
+</body>
+</html>

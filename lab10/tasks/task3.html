@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html> 
+<head>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    #hide_text.clicked {
+      border: 2px red;
+      background-color: yellow;
+    }
+    #imageContainer {
+      position: relative;
+    }
+    #imageContainer img {
+      display: none;
+      cursor: pointer;
+    }
+    #imageContainer p {
+      cursor: pointer;
+      text-decoration: underline;
+      color: blue;
+    }
+    #imageOverlay {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Контент сторінки</h1>
+  <a href="#" class="button">Натисніть, щоб показати текст</a>
+
+  <div id="hide_text">Демонстраційний прихований текст</div>
+
+  <button id="singleClickBtn">Одинарний клік</button>
+  <button id="doubleClickBtn">Подвійний клік</button>
+
+  <div id="imageContainer">
+    <p id="showImage">Показати зображення</p>
+    <img id="mainImage" src="https://picsum.photos/200/300" alt="Зображення">
+    <div id="imageOverlay">Підпис до зображення</div>
+  </div>
+
+  <p> Введіть в текстове поле слово 'correct'.</p>
+  <form action="javascript:alert('Успішно!');">
+    <div>
+      <input type="text" />
+      <input type="submit" />
+    </div>
+  </form>
+  <span></span>
+
+  <script>
+    $(document).ready(function() { 
+      const $text = $('#hide_text');
+
+      $text.hide();
+
+      $('.button').click(function() {
+        $text.show(200);
+      });
+
+      $text.bind({
+        click: function() {
+          $(this).addClass('clicked');
+        },
+        dblclick: function() {
+          $(this).removeClass('clicked');
+        }
+      });
+
+      $('#singleClickBtn').bind('click', function() {
+        alert('Одинарний клік');
+      });
+
+      $('#doubleClickBtn').bind('dblclick', function() {
+        alert('Подвійний клік');
+      });
+
+      const $image = $('#mainImage');
+      const $showImage = $('#showImage');
+      const $imageOverlay = $('#imageOverlay');
+
+      $showImage.click(function() {
+        $image.show(200);
+      });
+
+      $image.click(function() {
+        $image.hide(200);
+      });
+
+      $image.mouseover(function() {
+        $imageOverlay.show();
+      });
+
+      $image.mouseout(function() {
+        $imageOverlay.hide();
+      });
+
+      $("form").submit(function() {
+        if ($("input:first").val() == "correct") {
+          $("span").text("Перевіряєм...").show();
+          return true;
+        }
+        $("span").text("Неправильно!").show().fadeOut(1000);
+        return false;
+      }); 
+
+    });
+  </script>
+</body>  
+</html>

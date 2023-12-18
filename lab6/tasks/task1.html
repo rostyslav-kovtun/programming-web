@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+</head>
+<body>
+
+<input type="text" id="emailInput" value="dwbyu@mail.ua">
+<button onclick="validateEmail()">Валідувати введену email адресу</button>
+
+<script>
+function validateEmail() {
+    let s = document.getElementById("emailInput").value;
+    let r = /^([a-z0-9]+)(\.[a-z0-9]+)*@([a-z0-9]+)(\.[a-z0-9]+)*$/i;
+    let a = s.match(r);
+
+    document.getElementById("result").innerHTML = "";
+
+    if (a) {
+        for (let i = 0; i < a.length; i++) {
+            document.getElementById("result").innerHTML += "<hr> a[" + i + "] " + a[i];
+        }
+    } else {
+        document.getElementById("result").innerHTML = "<hr> Не знайдено збігів у введеній адресі email.";
+    }
+}
+</script>
+
+<div id="result"></div>
+
+</body>
+</html>

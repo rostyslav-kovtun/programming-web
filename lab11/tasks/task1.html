@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 1</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="myDiv">Hello, World!</div>
+<input id="myInput" type="text" value="Старе значення"/>
+<a style="display: block" id="myLink" href="https://www.jquery.com">link</a>
+
+<script>
+  // .html()
+  const htmlContent = $('#myDiv').html();
+  console.log(htmlContent);
+  $('#myDiv').html('Hello <b>World!</b>');
+
+  // .css()
+  const fontSize = $('#myDiv').css('font-size');
+  console.log(fontSize);
+  $('#myDiv').css({
+    'color': 'green',
+    'font-size': '20px'
+  });
+
+  // .val()
+  const inputValue = $('#myInput').val();
+  console.log(inputValue);
+  $('#myInput').val('Нове значення');
+
+  // .attr()
+  const hrefValue = $('#myLink').attr('href');
+  console.log(hrefValue);
+  $('#myLink').attr('href', 'https://www.example.com');
+  $('#myLink').attr({
+    'target': '_blank',
+    'title': 'External link'
+  });
+  $('#myLink').attr('style', function(index, oldValue) {
+    return oldValue = 'color: red;';
+  });
+
+  // .removeAttr()
+  $('#myLink').removeAttr('title');
+</script>
+
+</body>
+</html>

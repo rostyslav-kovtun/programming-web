@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    #train {
+      position: relative;
+      cursor: pointer;
+    }
+    progress {
+      width: 5%;
+    }
+  </style>
+  <script src="animate.js"></script>
+</head>
+
+<body>
+  
+  <!-- 1. Використання setInterval -->
+  <h1>1. Використання setInterval</h1>
+  <img id="train" src="https://js.cx/clipart/train.gif">
+
+  <!-- 2. Використання requestAnimationFrame -->
+  <h1>2. Використання requestAnimationFrame</h1>
+  <div id="requestAnimationFrame"></div>
+
+  <!-- 3. Використання Structured animation -->
+  <h1>3. Використання Structured animation</h1>
+  <progress id="elem"></progress>
+
+  <script>
+    // 1. Використання setInterval
+    train.onclick = function() {
+      let start = Date.now();
+
+      let timer = setInterval(function() {
+        let timePassed = Date.now() - start;
+
+        train.style.left = timePassed / 5 + 'px';
+
+        if (timePassed > 2000) clearInterval(timer);
+
+      }, 20);
+    }
+
+    // 2. Використання requestAnimationFrame
+    const requestAnimationFrameElement = document.getElementById('requestAnimationFrame');
+
+    let prev = performance.now();
+    let times = 0;
+
+    requestAnimationFrame(function measure(time) {
+      requestAnimationFrameElement.insertAdjacentHTML("beforeEnd", Math.floor(time - prev) + " ");
+      prev = time;
+
+      if (times++ < 10) requestAnimationFrame(measure);
+    })
+
+    // 3. Використання Structured animation
+    elem.onclick = function() {
+      animate({
+        duration: 1000,
+        timing: function(timeFraction) {
+          return timeFraction;
+        },
+        draw: function(progress) {
+          elem.style.width = progress * 100 + '%';
+        }
+      });
+    };
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 4</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+  </style>
+</head>
+<body>
+
+<button id="modifyByClass">Для всіх елементів класу modify</button>
+<button id="modifyEveryThirdLi">Для кожного третього елементу &lt;li&gt;</button>
+
+<ul>
+  <li class="modify">List item 1</li>
+  <li class="modify">List item 2</li>
+  <li>List item 3</li>
+  <li class="modify">List item 4</li>
+  <li class="modify">List item 5</li>
+  <li>List item 6</li>
+</ul>
+
+<script>
+  $(document).ready(function() {
+    // .filter() для всіх елементів класу modify
+    $('#modifyByClass').click(function() {
+      $('li').filter('.modify').css({
+        'font-weight': 'bold',
+        'color': 'blue'
+      }).text('modify');
+    });
+
+    // .filter() для кожного третього <li>
+    $('#modifyEveryThirdLi').click(function() {
+      $('li').filter(':nth-child(3n)').css({
+        'background-color': '#ffd700',
+        'border': '2px solid #e0e0e0'
+      }).text('modify');
+    });
+  });
+</script>
+
+</body>
+</html>

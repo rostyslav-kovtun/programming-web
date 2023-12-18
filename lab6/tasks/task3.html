@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2.2</title>
+</head>
+<body>
+
+<form id="registrationForm">
+    <label for="email">Електронна пошта:</label>
+    <input type="text" id="email" name="email" required>
+    <span id="emailValidation"></span>
+    <br>
+
+    <label for="name">Ім'я та Прізвище:</label>
+    <input type="text" id="name" name="name" required>
+    <span id="nameValidation"></span>
+    <br>
+
+    <label for="login">Логін:</label>
+    <input type="text" id="login" name="login" required>
+    <span id="loginValidation"></span>
+    <br>
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required>
+    <span id="passwordValidation"></span>
+    <br>
+
+    <label for="postalCode">Поштовий індекс:</label>
+    <input type="text" id="postalCode" name="postalCode" required>
+    <span id="postalCodeValidation"></span>
+    <br>
+
+    <input type="submit" value="Створити акаунт">
+</form>
+
+<script>
+document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    function validateEmail(email) {
+        let regex = /^.+@pnu\.edu\.ua$/;
+        return regex.test(email);
+    }
+
+    function validateName(name) {
+        let regex = /^([A-Z][a-z]+)\s([A-Z][a-z]+)$/;
+        return regex.test(name);
+    }
+
+    function validateLogin(login) {
+        let regex = /^[a-zA-Z]+$/;
+        return regex.test(login);
+    }
+
+    function validatePassword(password) {
+        let regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[-_!@#$%^&*]).{8,}$/;
+        return regex.test(password);
+    }
+
+    function validatePostalCode(postalCode) {
+        let regex = /^\d{5}$/;
+        return regex.test(postalCode);
+    }
+
+    let email = document.getElementById("email").value;
+    let name = document.getElementById("name").value;
+    let login = document.getElementById("login").value;
+    let password = document.getElementById("password").value;
+    let postalCode = document.getElementById("postalCode").value;
+
+    updateValidation("emailValidation", validateEmail(email), "@pnu.edu.ua");
+    updateValidation("nameValidation", validateName(name), "Повинні містити лише літери, у першому слові перша літера велика, наступні маленькі, у другому слові всі букви великі, дозволено кирилиця і латина");
+    updateValidation("loginValidation", validateLogin(login), "Введіть логін (тільки латина)");
+    updateValidation("passwordValidation", validatePassword(password), "Мінімум 8 символів з яких мінімум по 1 букві, цифрі та спецсимволу (_-!@#$%^&*)");
+    updateValidation("postalCodeValidation", validatePostalCode(postalCode), "Поштовий індекс повинен складатися з 5 цифр");
+});
+
+function updateValidation(elementId, isValid, message) {
+    let element = document.getElementById(elementId);
+    let inputField = document.getElementById(elementId.replace("Validation", ""));
+
+    if (isValid) {
+        element.innerHTML = "✔️";
+        inputField.style.border = "2px double black";
+        inputField.style.color = "black";
+    } else {
+        element.innerHTML = message;
+        inputField.style.border = "6px double red";
+        inputField.style.color = "red";
+    }
+}
+</script>
+
+</body>
+</html>

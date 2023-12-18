@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2</title>
+</head>
+<body>
+
+<form id="taskForm">
+
+    <!-- Завдання 2.1 -->
+    <label for="stringCompareInput1">Рядок 1:</label>
+    <input type="text" id="stringCompareInput1" required>
+    <br>
+    <label for="stringCompareInput2">Рядок 2:</label>
+    <input type="text" id="stringCompareInput2" required>
+    <button type="button" onclick="compareStrings()">Порівняти довжину</button>
+    <div id="compareStringsResult"></div>
+    <br>
+
+    <!-- Завдання 2.2 -->
+    <label for="findCharInput">Рядок:</label>
+    <input type="text" id="findCharInput" required>
+    <label for="charToFind">Символ:</label>
+    <input type="text" id="charToFind" maxlength="1" required>
+    <button type="button" onclick="findChar()">Знайти символ</button>
+    <div id="findCharResult"></div>
+    <br>
+
+    <!-- Завдання 2.3 -->
+    <label for="capitalizeInput">Рядок для верхнього регістру:</label>
+    <input type="text" id="capitalizeInput" required>
+    <button type="button" onclick="capitalizeFirst()">Верхній регістр</button>
+    <div id="capitalizeResult"></div>
+    <br>
+
+    <!-- Завдання 2.4 -->
+    <label for="countVowelsInput">Рядок для підрахунку голосних:</label>
+    <input type="text" id="countVowelsInput" required>
+    <button type="button" onclick="countVowels()">Підрахунок голосних</button>
+    <div id="countVowelsResult"></div>
+    <br>
+
+    <!-- Завдання 2.5 -->
+    <label for="spamCheckInput">Рядок для перевірки спаму:</label>
+    <input type="text" id="spamCheckInput" required>
+    <button type="button" onclick="checkSpam()">Перевірка на спам</button>
+    <div id="checkSpamResult"></div>
+    <br>
+
+    <!-- Завдання 2.6 -->
+    <label for="truncateInput">Рядок для скорочення:</label>
+    <input type="text" id="truncateInput" required>
+    <label for="maxLength">Максимальна довжина:</label>
+    <input type="number" id="maxLength" min="0" required>
+    <button type="button" onclick="truncateString()">Скоротити рядок</button>
+    <div id="truncateResult"></div>
+    <br>
+
+</form>
+
+<script>
+// Завдання 2.1
+function compareStrings() {
+    const string1 = document.getElementById('stringCompareInput1').value;
+    const string2 = document.getElementById('stringCompareInput2').value;
+
+    if (string1.length > string2.length) {
+        document.getElementById('compareStringsResult').innerText = '1';
+    } else if (string1.length < string2.length) {
+        document.getElementById('compareStringsResult').innerText = '-1';
+    } else {
+        document.getElementById('compareStringsResult').innerText = '0';
+    }
+}
+
+// Завдання 2.2
+function findChar() {
+    const inputString = document.getElementById('findCharInput').value;
+    const charToFind = document.getElementById('charToFind').value;
+    const indices = [];
+
+    let count = 0;
+
+    for (let i = 0; i < inputString.length; i++) {
+        if (inputString[i] === charToFind) {
+            indices.push(i);
+            count++;
+        }
+    }
+
+    document.getElementById('findCharResult').innerText = 'Індекси: ' + indices.join(', ') + '. Кількість: ' + count;
+}
+
+// Завдання 2.3
+function capitalizeFirst() {
+    const inputString = document.getElementById('capitalizeInput').value;
+
+    if (inputString.length > 0) {
+        const capitalizedString = inputString.charAt(0).toUpperCase() + inputString.slice(1);
+        document.getElementById('capitalizeResult').innerText = capitalizedString;
+    } else {
+        document.getElementById('capitalizeResult').innerText = 'Рядок порожній.';
+    }
+}
+
+// Завдання 2.4
+function countVowels() {
+    const inputString = document.getElementById('countVowelsInput').value;
+    const vowels = 'aeiouAEIOUаеіоуАЕІОУ';
+
+    let count = 0;
+
+    for (let i = 0; i < inputString.length; i++) {
+        if (vowels.includes(inputString[i])) {
+            count++;
+        }
+    }
+
+    document.getElementById('countVowelsResult').innerText = 'Кількість голосних: ' + count;
+}
+
+
+// Завдання 2.5
+function checkSpam() {
+    const inputString = document.getElementById('spamCheckInput').value.toLowerCase();
+    const spamWords = ['100% безкоштовно', 'збільшення продажів', 'тільки сьогодні', 'не видаляйте'];
+    let isSpam = false;
+
+    for (const spamWord of spamWords) {
+        if (inputString.includes(spamWord)) {
+            isSpam = true;
+            break;
+        }
+    }
+
+    document.getElementById('checkSpamResult').innerText = isSpam ? 'true' : 'false';
+}
+
+// Завдання 2.6
+function truncateString() {
+    const inputString = document.getElementById('truncateInput').value;
+    const maxLength = parseInt(document.getElementById('maxLength').value);
+
+    if (!isNaN(maxLength) && maxLength > 0) {
+        if (inputString.length > maxLength) {
+            const truncatedString = inputString.slice(0, maxLength - 3) + '...';
+            document.getElementById('truncateResult').innerText = truncatedString;
+        } else {
+            document.getElementById('truncateResult').innerText = inputString;
+        }
+    } else {
+        document.getElementById('truncateResult').innerText = 'Введіть коректну максимальну довжину.';
+    }
+}
+</script>
+
+</body>
+</html>

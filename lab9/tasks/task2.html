@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #logo-container {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      cursor: pointer;
+    }
+
+    #logo {
+      width: 100%;
+      height: 100%;
+      transition: transform 5s ease-out, opacity 2s ease-in-out;
+    }
+
+    .animate {
+      transform: translateX(1000px);
+      opacity: 0.5;
+    }
+
+    #info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      color: #333;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+  </style>
+  <title>Animated Logo</title>
+</head>
+<body>
+  <div id="logo-container">
+    <img id="logo" src="../images/logo.jpg" alt="Logo">
+  </div>
+  <div id="info">Dynamic Information</div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var logoContainer = document.getElementById('logo-container');
+      var logo = document.getElementById('logo');
+      var info = document.getElementById('info');
+
+      logoContainer.addEventListener('click', function () {
+        logo.classList.add('animate');
+
+        setTimeout(function () {
+          logo.classList.remove('animate');
+        }, 5000);
+
+        // Динамічна поява текстової інформації
+        info.innerHTML = "Software Engineering";
+        logo.style.filter = "grayscale(100%)";
+        info.style.opacity = 1;
+
+        // Динамічна поява нових об'єктів
+        var newObject = document.createElement('div');
+        newObject.innerHTML = "New Object";
+        newObject.style.position = "absolute";
+        newObject.style.top = "50%";
+        newObject.style.left = "20%";
+        newObject.style.transform = "translate(-50%, -50%)";
+        document.body.appendChild(newObject);
+
+        // Динамічна зміна властивостей, анімація двох об'єктів водночас
+        logo.style.transition = "transform 5s ease-out, opacity 2s ease-in-out";
+        info.style.transition = "opacity 2s ease-in-out";
+
+        setTimeout(function () {
+          logo.style.filter = "grayscale(0%)";
+          info.style.opacity = 0;
+          document.body.removeChild(newObject);
+        }, 5000);
+      });
+    });
+  </script>
+</body>
+</html>
