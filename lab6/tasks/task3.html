@@ -9,27 +9,28 @@
 
 <form id="registrationForm">
     <label for="email">Електронна пошта:</label>
-    <input type="text" id="email" name="email" required>
+    <input type="text" id="email" name="email">
     <span id="emailValidation"></span>
     <br>
 
     <label for="name">Ім'я та Прізвище:</label>
-    <input type="text" id="name" name="name" required>
+    <input type="text" id="name" name="name">
     <span id="nameValidation"></span>
     <br>
 
     <label for="login">Логін:</label>
-    <input type="text" id="login" name="login" required>
+    <input type="text" id="login" name="login">
     <span id="loginValidation"></span>
     <br>
 
     <label for="password">Пароль:</label>
-    <input type="password" id="password" name="password" required>
+    <input type="password" id="password" name="password">
     <span id="passwordValidation"></span>
+    <input type="checkbox" onclick="showPassword()">Show Password
     <br>
 
     <label for="postalCode">Поштовий індекс:</label>
-    <input type="text" id="postalCode" name="postalCode" required>
+    <input type="text" id="postalCode" name="postalCode">
     <span id="postalCodeValidation"></span>
     <br>
 
@@ -64,7 +65,7 @@ document.getElementById("registrationForm").addEventListener("submit", function(
         let regex = /^\d{5}$/;
         return regex.test(postalCode);
     }
-
+    
     let email = document.getElementById("email").value;
     let name = document.getElementById("name").value;
     let login = document.getElementById("login").value;
@@ -90,6 +91,14 @@ function updateValidation(elementId, isValid, message) {
         element.innerHTML = message;
         inputField.style.border = "6px double red";
         inputField.style.color = "red";
+    }
+}
+
+function showPassword() {
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
     }
 }
 </script>
