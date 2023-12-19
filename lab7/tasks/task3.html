@@ -30,6 +30,12 @@
     <div id="replaceDatesResult"></div>
     <br>
 
+    <!-- Task 3.4 -->
+    <label for="vowelsUpperCase">Type vowels</label>
+    <input type="text" id="vowelsUpperCase">
+    <button type="button" onclick="toVowelsUpperCase()">Make vowels upper cased</button>
+    <div id="vowelsUpperCaseResult"></div>
+    
 </form>
 
 <script>
@@ -62,6 +68,23 @@ function replaceDates() {
     const replacedText = inputText.replace(/(\d{4})\/(\d{2})\/(\d{2})/g, '$3.$2.$1');
 
     document.getElementById('replaceDatesResult').innerText = 'Результат: ' + replacedText;
+}
+
+// Task 3.4
+function toVowelsUpperCase() {
+    const vowelsInputText = document.getElementById('vowelsUpperCase').value;
+    const vowelsUpperCaseResultElement = document.getElementById('vowelsUpperCaseResult');
+    let vowelsOutputText = "";
+
+    for (let i = 0; i < vowelsInputText.length; i++) {
+        let currentChar = vowelsInputText.charAt(i);
+        if ("aiueoAIUEO".includes(currentChar)) {
+            vowelsOutputText += currentChar.toUpperCase();
+        } else {
+        vowelsOutputText += currentChar;
+        }
+    }
+    vowelsUpperCaseResultElement.innerText = vowelsOutputText;
 }
 </script>
 
